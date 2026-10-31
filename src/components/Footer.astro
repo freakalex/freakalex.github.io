@@ -1,6 +1,5 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import Socials from "./Socials.astro";
 import { useTranslations } from "@/i18n";
 
 type Props = {
@@ -20,7 +19,7 @@ const currentYear = new Date().getFullYear();
   <div
     class="border-border flex flex-col items-center justify-between border-t py-6 sm:flex-row-reverse sm:py-4"
   >
-    <Socials />
+    <a href="https://github.com/satnaing/astro-paper" class="text-sm underline decoration-dashed underline-offset-4">AstroPaper</a>
     <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row">
       <span>{t.footer.copyright} &#169; {currentYear}</span>
       <span class="hidden sm:inline">&nbsp;|&nbsp;</span>

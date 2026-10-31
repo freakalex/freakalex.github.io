@@ -1,0 +1,28 @@
+---
+import { collection } from "@/data/adventure";
+import { getAssetPath } from "@/utils/withBase";
+import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
+const { images, quotes } = collection;
+---
+<div data-adventure-collection>
+  <section id="hero" class="adventure-hero" aria-labelledby="adventure-title">
+    <div class="wallpaper-gallery" role="region" aria-label="Adventure Time 图片收藏" tabindex="0">
+      {images.map((image,index) => <figure class="wallpaper" data-slide hidden={index !== 0}>
+        <img src={getAssetPath(image.src)} alt={image.alt} width="1920" height="1080" loading={index===0 ? "eager" : "lazy"} fetchpriority={index===0 ? "high" : "auto"} />
+        <figcaption><span>{image.title}</span><a href={image.source} target="_blank" rel="noreferrer">画面来源 ↗</a></figcaption>
+      </figure>)}
+      <div class="gallery-arrows" data-interactive hidden={images.length<2}><button type="button" data-image-prev aria-label="上一张图片">←</button><button type="button" data-image-next aria-label="下一张图片">→</button></div>
+    </div>
+    <div class="gallery-toolbar" data-interactive><span data-image-count aria-live="polite">1 / {images.length}</span><button type="button" class="collection-button" data-random>↝ 随机遇见</button></div>
+    <div class="adventure-intro"><div><span class="adventure-kicker">FINN & JAKE / LAND OF OOO</span><h1 id="adventure-title">Adventure Time<span>.</span></h1><p>我的个人博客。写点技术，也写点生活。</p></div><a class="adventure-button" href="#recent-posts">阅读文章 <IconArrowRight width={18} height={18} /></a></div>
+  </section>
+  <section class="quote-collection" aria-label="喜欢的台词">
+    <div class="quote-header"><span class="adventure-kicker">LINES TO KEEP / 喜欢的台词</span><span data-quote-count aria-live="polite">1 / {quotes.length}</span></div>
+    <div aria-live="polite" aria-atomic="true">{quotes.map((quote,index)=><div class="quote-copy" data-quote hidden={index!==0}><blockquote lang="en">“{quote.text}”</blockquote><p>— {quote.character}{quote.episode && <> · <cite>{quote.episode}</cite></>}</p><a class="quote-source" href={quote.source} target="_blank" rel="noreferrer">台词出处 ↗</a></div>)}</div>
+    <div class="quote-actions" data-interactive><button type="button" class="collection-button" data-quote-next disabled={quotes.length<2}>换句台词 ↻</button><button type="button" class="collection-button" data-copy>复制台词</button><span data-copy-status role="status"></span></div>
+  </section>
+  <noscript><style>[data-interactive]{display:none!important}</style><p class="collection-hint">关闭 JavaScript 时展示第一张图片和第一句台词。</p></noscript>
+</div>
+<script>
+  import "@/scripts/adventure-collection";
+</script>
